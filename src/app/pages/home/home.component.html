@@ -3,5 +3,15 @@
   <p>Este é um sistema desenvolvido em Angular CLI para gerenciar informações de clientes.</p>
   <p>Projeto Desenvolvido junto a Minsait.</p>
   <p>Instrutor: Rafael Ferreira</p>
-  <a class="btn btn-primary mt-3" routerLink="/cliente" routerLinkActive="active">Acessar lista de clientes</a>
+
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Guia Cadastro
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" routerLink="/cliente" routerLinkActive="active">Acessar lista de clientes</a></li>
+      <li><a class="dropdown-item" routerLink="/cliente/cadastrar" routerLinkActive="active">Cadastrar novo Cliente</a></li>
+    </ul>
+  </div>
+
 </div>
