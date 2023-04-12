@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICliente } from 'src/app/interfaces/cliente';
 import { ClientesService } from 'src/app/services/clientes.service';
 import Swal from 'sweetalert2';
@@ -14,17 +14,17 @@ import Swal from 'sweetalert2';
 export class CadastrarAtualizarClienteComponent {
 
   clienteForm = new FormGroup({
-    cpf: new FormControl( 0, Validators.required),
+    cpf: new FormControl(0, Validators.required),
     nome: new FormControl('', Validators.required),
     telefone: new FormControl('', Validators.required),
-    rendimentoMensal: new FormControl( 0, Validators.required),
+    rendimentoMensal: new FormControl(0, Validators.required),
     endereco: new FormGroup({
-    rua: new FormControl('', Validators.required),
-    numero: new FormControl('', Validators.required),
-    cep: new FormControl('', Validators.required)
+      rua: new FormControl('', Validators.required),
+      numero: new FormControl('', Validators.required),
+      cep: new FormControl('', Validators.required)
     })
   })
-  constructor(private clientesService: ClientesService, private route: ActivatedRoute, private titleService: Title) {}
+  constructor(private clientesService: ClientesService, private route: ActivatedRoute, private titleService: Title, private router: Router) {}
 
   clientecpf = 0;
   ngOnInit() {
@@ -37,9 +37,9 @@ export class CadastrarAtualizarClienteComponent {
           telefone: cliente.telefone,
           rendimentoMensal: cliente.rendimentoMensal,
           endereco:{
-          rua: cliente.endereco.rua,
-          numero: cliente.endereco.numero,
-          cep: cliente.endereco.cep
+            rua: cliente.endereco.rua,
+            numero: cliente.endereco.numero,
+            cep: cliente.endereco.cep
           }
         });
         this.titleService.setTitle(`Editar Cliente - ${cliente.cpf}`);
@@ -54,21 +54,27 @@ export class CadastrarAtualizarClienteComponent {
     if (this.clientecpf) {
       this.clientesService.atualizarCliente(cliente).subscribe(() => {
         Swal.fire(
-        'Sucesso!', 
-        'Cliente atualizado com sucesso!', 
-        'success'
+          'Sucesso!',
+          'Cliente atualizado com sucesso!',
+          'success'
         );
+        this.voltar();
       });
     } else {
       this.clientesService.cadastrarCliente(cliente).subscribe(() => {
         Swal.fire(
-          'Sucesso!', 
-          'Cliente cadastrado com sucesso!', 
+          'Sucesso!',
+          'Cliente cadastrado com sucesso!',
           'success'
-          );
+        );
         this.clienteForm.reset();
+        this.voltar();
       });
     }
+  }
+
+  voltar() {
+    window.history.back();
   }
 
 }

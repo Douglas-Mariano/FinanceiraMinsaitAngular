@@ -10,7 +10,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent {
+
   clientes: ICliente[] = [];
+
   constructor(private clienteService: ClientesService, private router: Router) {}
 
   ngOnInit() {
@@ -22,18 +24,20 @@ export class ClienteComponent {
   deletarCliente(cpf: number) {
     this.clienteService.deletarCliente(cpf).subscribe(() => {
       Swal.fire(
-        'Cliente deletado', 
-        '', 
+        'Cliente deletado',
+        '',
         'success'
-        );
-      this.router.navigate([]);
+      );
+      this.clienteService.buscarTodosClientes().subscribe((result: ICliente[]) => {
+        this.clientes = result;
+      });
     }, (error) => {
       Swal.fire(
-        'Erro', 
-        'Ocorreu um erro ao deletar o cliente', 
+        'Erro',
+        'Ocorreu um erro ao deletar o cliente',
         'error'
-        );
+      );
     });
   }
-  
+
 }
