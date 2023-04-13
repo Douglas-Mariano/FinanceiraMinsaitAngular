@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClienteComponent,
     HomeComponent,
     NavbarComponent,
-    CadastrarAtualizarClienteComponent
+    CadastrarAtualizarClienteComponent,
   ],
   imports: [
     BrowserModule,
