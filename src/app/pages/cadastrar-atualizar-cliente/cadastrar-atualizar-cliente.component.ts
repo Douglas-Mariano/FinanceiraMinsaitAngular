@@ -24,7 +24,8 @@ export class CadastrarAtualizarClienteComponent {
       cep: new FormControl('', Validators.required)
     })
   })
-  constructor(private clientesService: ClientesService, private route: ActivatedRoute, private titleService: Title, private router: Router) {}
+  constructor(private clientesService: ClientesService, private route: ActivatedRoute,
+    private titleService: Title, private router: Router) {}
 
   clientecpf = 0;
   ngOnInit() {
